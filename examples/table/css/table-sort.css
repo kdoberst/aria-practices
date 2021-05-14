@@ -1,0 +1,48 @@
+table[data-sort-table] th > button::after {
+  content: "\21C5";
+  color: #757575;
+}
+table[data-sort-table] th[aria-sort="descending"] > button::after {
+  content: "\2193";
+  font-weight: bold;
+  color: #000;
+}
+table[data-sort-table] th[aria-sort="ascending"] > button::after {
+  content: "\2191";
+  font-weight: 900;
+  color: #000;
+
+  /* double arrow \21C5 */
+}
+table[data-sort-table] th > button {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 100%;
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+}
+
+table[data-sort-table] th > button > span {
+  padding-right: 10px;
+}
+
+table.sortable {
+  border-collapse: collapse;
+}
+
+table.sortable th,
+table.sortable td {
+  padding: 0.25em 0.5em;
+  min-width: 8em;
+}
+table.sortable thead th {
+  border-bottom: 1px solid #888;
+}
+table.sortable tbody tr:nth-child(odd) {
+  background-color: #ddd;
+}
+table.sortable tbody th {
+  font-weight: normal;
+}
