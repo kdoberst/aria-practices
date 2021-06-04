@@ -27,6 +27,10 @@ class SortTable {
         this.sort(header);
       }
     });
+    header.addEventListener('click', (event) => {
+      const header = event.target;
+      this.sort(header);
+    });
   }
 
   sort(header) {
