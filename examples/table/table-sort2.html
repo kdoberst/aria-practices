@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Table Sorting Example | WAI-ARIA Authoring Practices 1.2</title>
+
+    <!--  Core js and css shared by all examples; do not modify when using this template. -->
+    <link
+      rel="stylesheet"
+      href="https://www.w3.org/StyleSheets/TR/2016/base.css"
+    />
+    <link rel="stylesheet" href="../css/core.css" />
+    <script src="../js/examples.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    <script src="../js/app.js"></script>
+
+    <!-- css for this example. -->
+    <link href="css/table-sort2.css" rel="stylesheet" />
+
+    <!-- js for this example-->
+    <script src="js/table-sort2.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <nav aria-label="Related Links" class="feedback">
+      <ul>
+        <li>
+          <a href="../../#browser_and_AT_support"
+            >Browser and Assistive Technology Support</a
+          >
+        </li>
+        <li>
+          <a href="https://github.com/w3c/aria-practices/issues/new"
+            >Report Issue</a
+          >
+        </li>
+        <li>
+          <a href="https://github.com/w3c/aria-practices/projects/16"
+            >Related Issues</a
+          >
+        </li>
+        <li><a href="../../#table">Design Pattern</a></li>
+      </ul>
+    </nav>
+    <main>
+      <h1>Table Sort Example</h1>
+      <p>
+        The below example illustrates an implementation of ARIA features to
+        support data table column sorting.
+      </p>
+      <p>Similar examples include:</p>
+      <ul>
+        <li>
+          <a href="../grid/dataGrids.html">Data Grid Examples</a>: Three example
+          implementations of grid that include features relevant to presenting
+          tabular information, such as content editing, sort, and column hiding.
+        </li>
+      </ul>
+
+      <section>
+        <div class="example-header">
+          <h2 id="ex_label">Example</h2>
+        </div>
+        <div
+          role="separator"
+          id="ex_start_sep"
+          aria-labelledby="ex_start_sep ex_label"
+          aria-label="Start of"
+        ></div>
+        <div id="ex1">
+          <h3 id="ex1Caption">Example 1: Apple Varieties</h3>
+          <table class="sortable" data-sort-table aria-describedby="ex1Caption">
+            <thead>
+              <tr>
+                <th
+                  scope="col"
+                  aria-sort="ascending"
+                  role="columnheader button"
+                  tabindex="0"
+                >
+                  Name
+                </th>
+                <th
+                  scope="col"
+                  role="columnheader button"
+                  aria-sort="none"
+                  tabindex="0"
+                >
+                  Year Introduced
+                </th>
+                <th scope="col">Season</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">First Kiss</th>
+                <td>2017</td>
+                <td>Early</td>
+              </tr>
+              <tr>
+                <th scope="row">Haralson</th>
+                <td>1922</td>
+                <td>Late</td>
+              </tr>
+              <tr>
+                <th scope="row">Honeycrisp</th>
+                <td>1991</td>
+                <td>Middle</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h4>Notes</h4>
+        <ol>
+          <li>
+            Column headers that support sorting contain
+            <code>button</code> tags. Keyboard support for this buttons is
+            documented in the <a href="../../#button">Button Design Pattern</a>.
+          </li>
+          <li>
+            Behavior (event listener) to sort a column when a header button is
+            activated is located in the <code>sortListener</code> method in the
+            <a href="js/table-sort.js" type="text/javascript">table-sort.js</a>
+            file.
+          </li>
+        </ol>
+        <div
+          role="separator"
+          id="ex_end_sep"
+          aria-labelledby="ex_end_sep ex_label"
+          aria-label="End of"
+        ></div>
+      </section>
+      <section>
+        <h2 id="kbd_label">Keyboard Support</h2>
+        <table aria-labelledby="kbd_label" class="def">
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-test-id="key-enter">
+              <th><kbd>Enter</kbd></th>
+              <td>Sorts column.</td>
+            </tr>
+            <tr data-test-id="key-space">
+              <th><kbd>Space</kbd></th>
+              <td>Sorts column.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 id="rps_label">Role, Property, State, and Tabindex Attributes</h2>
+        <table aria-labelledby="rps_label" class="data attributes">
+          <thead>
+            <tr>
+              <th scope="col">Role</th>
+              <th scope="col">Attribute</th>
+              <th scope="col">Element</th>
+              <th scope="col">Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><code>button</code></th>
+              <td></td>
+              <td>th</td>
+              <td>
+                Identifies the column header as <code>button</code> widget that
+                will sort the table when activated.
+              </td>
+            </tr>
+            <tr>
+              <th scope="row"><code>columnheader</code></th>
+              <td></td>
+              <td>th</td>
+              <td>Identifies the header as a column header.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <th scope="row"><code>tabindex=&quot;0&quot;</code></th>
+              <td>th</td>
+              <td>Includes the header in the tab sequence.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <th scope="row"><code>aria-sort=&quot;descending&quot;</code></th>
+              <td>th</td>
+              <td>
+                Indicates that the column is sortable, and is currently sorted
+                descending.
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <th scope="row"><code>aria-sort=&quot;ascending&quot;</code></th>
+              <td>th</td>
+              <td>
+                Indicates that the column is sortable, and is currently sorted
+                ascending.
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <th scope="row"><code>aria-sort=&quot;none&quot;</code></th>
+              <td>th</td>
+              <td>
+                Indicates that the column is sortable, but not currently sorted.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Javascript and CSS Source Code</h2>
+        <!--  After the js and css files are named with the name of this example, change the href and text of the following 2 links to refer to the appropriate js and css files.  -->
+        <ul id="css_js_files">
+          <li>
+            CSS:
+            <a href="css/table-sort2.css" type="tex/css">table-sort.css</a>
+          </li>
+          <li>
+            Javascript:
+            <a href="js/table-sort2.js" type="text/javascript">table-sort.js</a>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 id="sc1_label">HTML Source Code</h2>
+        <div
+          role="separator"
+          id="sc1_start_sep"
+          aria-labelledby="sc1_start_sep sc1_label"
+          aria-label="Start of"
+        ></div>
+        <pre><code id="sc1"></code></pre>
+        <div
+          role="separator"
+          id="sc1_end_sep"
+          aria-labelledby="sc1_end_sep sc1_label"
+          aria-label="End of"
+        ></div>
+        <script>
+          sourceCode.add('sc1', 'ex1', 'ex_label', 'css_js_files');
+          sourceCode.make();
+        </script>
+      </section>
+    </main>
+    <nav>
+      <a href="../../#table"
+        >Table Design Pattern in WAI-ARIA Authoring Practices 1.2</a
+      >
+    </nav>
+  </body>
+</html>
