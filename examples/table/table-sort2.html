@@ -112,15 +112,17 @@
         <h4>Notes</h4>
         <ol>
           <li>
-            Column headers that support sorting contain
-            <code>button</code> tags. Keyboard support for this buttons is
-            documented in the <a href="../../#button">Button Design Pattern</a>.
-          </li>
-          <li>
             Behavior (event listener) to sort a column when a header button is
             activated is located in the <code>sortListener</code> method in the
             <a href="js/table-sort.js" type="text/javascript">table-sort.js</a>
             file.
+          </li>
+          <li>
+            Header cells (<code>th</code>) that are sortable have both the
+            <code>columnheader</code> and <code>button</code> roles to indicate
+            that the header serves both as a column header and as a button. Only
+            the the first role (<code>columnheader</code>) is enforced by user
+            agents.
           </li>
         </ol>
         <div
