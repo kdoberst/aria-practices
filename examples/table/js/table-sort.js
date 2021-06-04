@@ -10,23 +10,10 @@
 
 class SortTable {
   constructor(table) {
-    const headerCells = table.querySelectorAll('thead th:not([data-no-sort]');
-    headerCells.forEach((headerCell) => {
-      this.addSortButton(headerCell);
+    const headerCells = table.querySelectorAll('thead th button');
+    headerCells.forEach((button) => {
+      this.sortListener(button);
     });
-  }
-  addSortButton(header) {
-    const button = document.createElement('button');
-    const buttonContent = document.createElement('span');
-
-    while (header.firstChild) {
-      buttonContent.appendChild(header.firstChild);
-    }
-
-    button.append(buttonContent);
-
-    this.sortListener(button);
-    header.append(button);
   }
 
   sortListener(button) {
@@ -67,15 +54,21 @@ class SortTable {
     return row.children[index].innerText || row.children[index].textContent;
   }
 
-  comparer(idx, asc) {
-    return (a, b) =>
-      ((v1, v2) =>
-        v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2)
-          ? v1 - v2
-          : v1.toString().localeCompare(v2))(
-        this.getCellValue(asc ? a : b, idx),
-        this.getCellValue(asc ? b : a, idx)
-      );
+  comparer(columnIndex, isAscending) {
+    return (rowA, rowB) => {
+      const cellA = this.getCellValue(rowA, columnIndex);
+      const cellB = this.getCellValue(rowB, columnIndex);
+
+      if (cellA !== '' && cellB !== '' && !isNaN(cellA) && !isNaN(cellB)) {
+        // cellA and cellB are both numbers
+        return isAscending ? cellA - cellB : cellB - cellA;
+      }
+
+      // treating cellA and cellB as strings
+      return isAscending
+        ? cellA.toString().localeCompare(cellB.toString())
+        : cellB.toString().localeCompare(cellA.toString());
+    };
   }
 }
 

@@ -67,12 +67,17 @@
           aria-label="Start of"
         ></div>
         <div id="ex1">
-          <table class="sortable" data-sort-table>
+          <h3 id="ex1Caption">Example 1: Apple Varieties</h3>
+          <table class="sortable" data-sort-table aria-describedby="ex1Caption">
             <thead>
               <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Year introduced</th>
-                <th scope="col" data-no-sort>Season</th>
+                <th scope="col" aria-sort="ascending">
+                  <button>Name</button>
+                </th>
+                <th scope="col">
+                  <button>Year Introduced</button>
+                </th>
+                <th scope="col">Season</th>
               </tr>
             </thead>
             <tbody>
@@ -82,18 +87,32 @@
                 <td>Early</td>
               </tr>
               <tr>
-                <th scope="row">Honeycrisp</th>
-                <td>1991</td>
-                <td>Middle</td>
-              </tr>
-              <tr>
                 <th scope="row">Haralson</th>
                 <td>1922</td>
                 <td>Late</td>
               </tr>
+              <tr>
+                <th scope="row">Honeycrisp</th>
+                <td>1991</td>
+                <td>Middle</td>
+              </tr>
             </tbody>
           </table>
         </div>
+        <h4>Notes</h4>
+        <ol>
+          <li>
+            Column headers that support sorting contain
+            <code>button</code> tags. Keyboard support for this buttons is
+            documented in the <a href="../../#button">Button Design Pattern</a>.
+          </li>
+          <li>
+            Behavior (event listener) to sort a column when a header button is
+            activated is located in the <code>sortListener</code> method in the
+            <a href="js/table-sort.js" type="text/javascript">table-sort.js</a>
+            file.
+          </li>
+        </ol>
         <div
           role="separator"
           id="ex_end_sep"
@@ -101,79 +120,6 @@
           aria-label="End of"
         ></div>
       </section>
-
-      <!-- <script>
-        const sortListener = (button) => {
-          button.addEventListener('click', (event) => {
-            const btn = event.target;
-
-            const headerRow = btn.closest('tr');
-            const headerCell = btn.closest('th');
-
-            const columnIndex = Array.from(
-              headerRow.querySelectorAll('th')
-            ).indexOf(headerCell);
-
-            const isAscending = setSortOrder(headerCell);
-
-            const tbody = btn.closest('table').querySelector('tbody');
-            Array.from(tbody.querySelectorAll('tr'))
-              .sort(comparer(columnIndex, isAscending))
-              .forEach((tr) => tbody.appendChild(tr));
-          });
-        };
-
-        const setSortOrder = (th) => {
-          const sortOrder =
-            th.getAttribute('aria-sort') === 'ascending'
-              ? 'descending'
-              : 'ascending';
-
-          Array.from(
-            th.closest('tr').querySelectorAll('th')
-          ).forEach((header) => header.removeAttribute('aria-sort'));
-
-          th.setAttribute('aria-sort', sortOrder);
-          return sortOrder === 'ascending';
-        };
-
-        const addSortButton = (th) => {
-          const button = document.createElement('button');
-          const buttonContent = document.createElement('span');
-
-          while (th.firstChild) {
-            buttonContent.appendChild(th.firstChild);
-          }
-
-          button.append(buttonContent);
-
-          sortListener(button);
-          th.append(button);
-        };
-
-        const getCellValue = (row, index) =>
-          row.children[index].innerText || row.children[index].textContent;
-
-        // https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript
-        const comparer = (idx, asc) => (a, b) =>
-          ((v1, v2) =>
-            v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2)
-              ? v1 - v2
-              : v1.toString().localeCompare(v2))(
-            getCellValue(asc ? a : b, idx),
-            getCellValue(asc ? b : a, idx)
-          );
-
-        document.querySelectorAll('table[data-sort-table]').forEach((table) => {
-          const headerCells = table.querySelectorAll(
-            'thead th:not([data-no-sort]'
-          );
-          headerCells.forEach((headerCell) => {
-            addSortButton(headerCell);
-          });
-        });
-      </script> -->
-
       <section>
         <h2 id="kbd_label">Keyboard Support</h2>
         <p>Not Applicable</p>

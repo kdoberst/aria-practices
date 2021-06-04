@@ -1,31 +1,27 @@
 table[data-sort-table] th > button::after {
-  content: "\21C5";
+  padding-left: 10px;
+  content: "\21C5"; /* double arrow */
   color: #757575;
 }
 table[data-sort-table] th[aria-sort="descending"] > button::after {
-  content: "\2193";
+  content: "\2193"; /* down arrow */
   font-weight: bold;
   color: #000;
 }
 table[data-sort-table] th[aria-sort="ascending"] > button::after {
-  content: "\2191";
+  content: "\2191"; /* up arrow */
   font-weight: 900;
   color: #000;
-
-  /* double arrow \21C5 */
 }
 table[data-sort-table] th > button {
   border: none;
   background: none;
-  padding: 0;
+  padding: 5px;
   font-size: 100%;
   font-weight: bold;
   width: 100%;
   text-align: left;
-}
-
-table[data-sort-table] th > button > span {
-  padding-right: 10px;
+  cursor: pointer;
 }
 
 table.sortable {
